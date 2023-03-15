@@ -1,0 +1,82 @@
+services:
+
+# Replica set
+  manager:
+    image: mongo
+    hostname: manager
+    command: --replSet rs1 --keyFile /etc/mongo-replication.key
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+    ports:
+      - 127.0.15.1:27017:27017
+    volumes:
+      - manager_data:/data/db
+      - ./mongo-replication.key:/etc/mongo-replication.key
+
+  worker1:
+    image: mongo
+    hostname: worker1
+    command: --replSet rs1 --keyFile /etc/mongo-replication.key
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+    ports:
+      - 127.0.15.2:27017:27017
+    volumes:
+      - worker_data_1:/data/db
+      - ./mongo-replication.key:/etc/mongo-replication.key
+    depends_on:
+      - manager
+
+  worker2:
+    image: mongo
+    hostname: worker2
+    command: --replSet rs1 --keyFile /etc/mongo-replication.key
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+    ports:
+      - 127.0.15.3:27017:27017
+    volumes:
+      - worker_data_2:/data/db
+      - ./mongo-replication.key:/etc/mongo-replication.key
+    depends_on:
+      - manager
+
+  worker3:
+    image: mongo
+    hostname: worker3
+    command: --replSet rs1 --keyFile /etc/mongo-replication.key
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+    ports:
+      - 127.0.15.4:27017:27017
+    volumes:
+      - worker_data_3:/data/db
+      - ./mongo-replication.key:/etc/mongo-replication.key
+    depends_on:
+      - manager
+
+  worker4:
+    image: mongo
+    hostname: worker4
+    command: --replSet rs1 --keyFile /etc/mongo-replication.key
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+    ports:
+      - 127.0.15.5:27017:27017
+    volumes:
+      - worker_data_4:/data/db
+      - ./mongo-replication.key:/etc/mongo-replication.key
+    depends_on:
+      - manager
+
+volumes:
+  manager_data:
+  worker_data_1:
+  worker_data_2:
+  worker_data_3:
+  worker_data_4:

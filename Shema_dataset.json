@@ -1,0 +1,32 @@
+{
+    "_id": "Number",
+
+    "rank": {
+        "type": "String"
+    },
+
+    "name": { 
+        "type": "String"
+    },
+
+    "networth": { 
+        "type": "String"
+    },
+
+    "age": { 
+        "type": "Number"
+    },
+
+    "country": { 
+        "type": "String"
+    },
+
+    "source": { 
+        "type": "String"
+    },
+
+    "industry": { 
+        "type": "String"
+    }
+    
+}
